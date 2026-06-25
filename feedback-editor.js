@@ -55,8 +55,10 @@
   // ================================================================
   //  DOM BUILDERS
   // ================================================================
+  var svgNS = "http://www.w3.org/2000/svg";
+  var svgTags = { svg:1, path:1, circle:1, rect:1, line:1, polyline:1, polygon:1, g:1, defs:1, clipPath:1, mask:1, text:1, tspan:1, use:1, symbol:1, pattern:1, linearGradient:1, radialGradient:1, stop:1 };
   function h(tag, attrs, ...children) {
-    const el = document.createElement(tag);
+    var el = svgTags[tag] ? document.createElementNS(svgNS, tag) : document.createElement(tag);
     if (attrs) {
       for (const [k, v] of Object.entries(attrs)) {
         if (k === "className") el.className = v;
@@ -310,9 +312,9 @@
 
     // Trigger button
     $trigger = h("button", { id: "fe-trigger", className: "fe-trigger", "data-fe-ui": "", onClick: enterEditMode, title: "标注修改意见" },
-      h("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none" },
-        h("path", { d: "M15.232 5.232l3.536 3.536M9 11l-1 5 5-1 9.192-9.192a2.5 2.5 0 10-3.536-3.536L9 11z", stroke: "currentColor", "stroke-width": "1.8", "stroke-linecap": "round", "stroke-linejoin": "round" }),
-        h("path", { d: "M21 21H3", stroke: "currentColor", "stroke-width": "1.8", "stroke-linecap": "round" })
+      h("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "#fff", "stroke-width": "1.8", "stroke-linecap": "round", "stroke-linejoin": "round" },
+        h("path", { d: "M15.232 5.232l3.536 3.536M9 11l-1 5 5-1 9.192-9.192a2.5 2.5 0 10-3.536-3.536L9 11z" }),
+        h("path", { d: "M21 21H3" })
       )
     );
 
